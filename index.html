@@ -3,12 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Allyn — To-Do List</title>
+    <title>Allyn — To‑Do List</title>
+
+    <!-- Styles -->
     <link rel="stylesheet" href="css\style.css" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -17,12 +21,8 @@
       <section class="card" aria-labelledby="title">
         <header class="head">
           <h1 id="title" class="title">
-            <img
-              src="asset\LogoAI-NovaNX.jpg"
-              alt="AI-NovaNX Logo"
-              class="logo"
-            />
-            Todo List
+            <img src="asset\Logo kucing.png" alt="Cute Cat Logo" class="logo" />
+            Todo List for Allyn
           </h1>
 
           <div class="head-ops">
@@ -37,13 +37,20 @@
           </div>
         </header>
 
+        <div class="subhead">
+          <span class="mood-badge" aria-label="ISTJ mode">Psychology</span>
+          <span class="trend-badge" aria-label="Gen Alpha vibe"
+            >Atma Jaya ✨</span
+          >
+        </div>
+
         <!-- Bar input -->
         <form id="todo-form" class="bar" novalidate>
           <div class="field">
             <input
               id="task-input"
               type="text"
-              placeholder="Add a todo . . ."
+              placeholder="Tambah tugas kamu…"
               required
             />
             <p id="err-title" class="err" aria-live="polite"></p>
@@ -67,7 +74,7 @@
           <button id="delete-all" class="btn btn-secondary">DELETE ALL</button>
         </div>
 
-        <!-- Tabel (header terpisah dari area scroll agar baris di atas tidak terlihat) -->
+        <!-- Tabel -->
         <div class="table-wrap">
           <table class="table table-head" aria-hidden="false">
             <thead>
@@ -94,28 +101,13 @@
             </table>
           </div>
         </div>
-
-        <!-- About / tech stack -->
-        <section class="about">
-          <p>
-            <strong>About this build:</strong> Vanilla JS + HTML + single CSS.
-            Persist via <code>localStorage</code>, accessible, responsive, and
-            themed (Dark/Light). Micro-interactions, progress insight, and toast
-            notification.
-          </p>
-        </section>
       </section>
 
       <footer class="nx-footer">
         <p>
           © 2025 <span class="brand">AI-NovaNX</span>. All rights reserved.
-          <span class="brand">AI-NovaNX</span> — Where Minimal Design Meets
-          Intelligent Engineering
+          <span class="brand">AI-NovaNX</span> — Minimal • High‑Tech
         </p>
-        <!--<p class="links">
-          <a href="#" aria-disabled="true">README</a> ·
-          <a href="#" aria-disabled="true">Live Demo</a>
-        </p>-->
       </footer>
     </main>
 

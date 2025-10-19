@@ -1,5 +1,5 @@
 /* =========================
-   AI-NovaNX To-Do Logic
+   AI-NovaNX To‑Do Logic (minor UX tweaks for PinkTech)
    ========================= */
 
 (() => {
@@ -17,9 +17,8 @@
   const barText = $("#progress-text");
   const toastWrap = $("#toast-container");
   const themeToggle = $("#theme-toggle");
-  // Area scroll baru (tbody dibungkus .table-scroll)
   const scrollArea = document.querySelector(".table-scroll");
-  const MAX_VISIBLE_ROWS = 5; // maximum rows visible without scrolling
+  const MAX_VISIBLE_ROWS = 5;
 
   // State
   let todos = load();
@@ -53,7 +52,6 @@
       return s;
     }
   }
-  // toast with optional action (label + callback)
   function showToast(
     msg,
     { label = null, onClick = null, duration = 3500 } = {}
@@ -72,9 +70,7 @@
       btn.addEventListener(
         "click",
         () => {
-          try {
-            onClick();
-          } catch (e) {}
+          try { onClick(); } catch (e) {}
           if (toastWrap.contains(el)) toastWrap.removeChild(el);
         },
         { once: true }
@@ -82,7 +78,6 @@
       el.appendChild(btn);
     }
     toastWrap.appendChild(el);
-    // auto-dismiss with exit animation
     setTimeout(() => {
       if (!toastWrap.contains(el)) return;
       el.classList.add("toast-exit");
@@ -127,6 +122,8 @@
     const pct = total ? Math.round((done / total) * 100) : 0;
     bar.style.width = pct + "%";
     barText.textContent = `${done} of ${total} (${pct}%)`;
+    // Easter egg: encourage focus (ISTJ vibe)
+    if (pct === 100 && total > 0) showToast("Semua selesai! Rapi dan mantap 💪");
   }
 
   // Render table
@@ -167,7 +164,7 @@
         t.done = cb.checked;
         save();
         render();
-        showToast(t.done ? "Task completed" : "Task re-opened");
+        showToast(t.done ? "Task completed 💗" : "Task re‑opened");
       });
       const span = document.createElement("span");
       span.textContent = t.title;
@@ -198,7 +195,7 @@
         t.done = !t.done;
         save();
         render();
-        showToast(t.done ? "Task completed" : "Task re-opened");
+        showToast(t.done ? "Task completed 💗" : "Task re‑opened");
       });
       const delBtn = document.createElement("button");
       delBtn.className = "icon";
@@ -234,17 +231,11 @@
     }
 
     updateProgress();
-
-    // Adjust dynamic max-height to fit header + first N rows
     adjustTableHeight(rows);
-
-    // (Scroll buttons removed) nothing to toggle
   }
 
-  // Dynamically set max-height of table wrapper to header + first MAX_VISIBLE_ROWS rows
   function adjustTableHeight(rows) {
     if (!scrollArea) return;
-    // Reset max-height sebelum pengukuran
     scrollArea.style.maxHeight = "";
     let height = 0;
     let counted = 0;
@@ -268,9 +259,7 @@
     e.preventDefault();
     if (!validate()) return;
     todos.push({
-      id: crypto.randomUUID
-        ? crypto.randomUUID()
-        : Math.random().toString(36).slice(2, 9),
+      id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2, 9),
       title: taskInput.value.trim(),
       due: dateInput.value,
       done: false,
@@ -280,8 +269,7 @@
     form.reset();
     dateInput.value = todayStr();
     render();
-    showToast("Task added");
-    // Auto-scroll to bottom if content overflows
+    showToast("Task added ✨");
     if (scrollArea && scrollArea.scrollHeight > scrollArea.clientHeight) {
       scrollArea.scrollTo({ top: scrollArea.scrollHeight, behavior: "smooth" });
     }
@@ -326,21 +314,14 @@
     document.body.classList.add("light");
   render();
 
-  // Scroll events
-  // Keyboard shortcuts: PageUp/PageDown scroll inside tableWrap
+  // Keyboard scrolling inside table
   document.addEventListener("keydown", (e) => {
     if (!scrollArea) return;
     if (e.key === "PageDown") {
-      scrollArea.scrollBy({
-        top: scrollArea.clientHeight * 0.9,
-        behavior: "smooth",
-      });
+      scrollArea.scrollBy({ top: scrollArea.clientHeight * 0.9, behavior: "smooth" });
       e.preventDefault();
     } else if (e.key === "PageUp") {
-      scrollArea.scrollBy({
-        top: -scrollArea.clientHeight * 0.9,
-        behavior: "smooth",
-      });
+      scrollArea.scrollBy({ top: -scrollArea.clientHeight * 0.9, behavior: "smooth" });
       e.preventDefault();
     } else if (e.key === "Home") {
       scrollArea.scrollTo({ top: 0, behavior: "smooth" });
