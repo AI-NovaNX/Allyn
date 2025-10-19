@@ -62,6 +62,13 @@
           <button type="submit" class="btn btn-add" title="Tambah">
             <span>+</span>
           </button>
+          <div class="field">
+            <input
+              id="note-input"
+              type="text"
+              placeholder="Note/Catatan (opsional)"
+            />
+          </div>
         </form>
 
         <!-- Bar operasi -->
@@ -80,6 +87,7 @@
             <thead>
               <tr>
                 <th>TASK</th>
+                <th>NOTE</th>
                 <th>DUE DATE</th>
                 <th>STATUS</th>
                 <th>ACTIONS</th>
@@ -95,7 +103,7 @@
             <table class="table table-body">
               <tbody id="todo-body">
                 <tr class="empty">
-                  <td colspan="4">No task found</td>
+                  <td colspan="5">No task found</td>
                 </tr>
               </tbody>
             </table>

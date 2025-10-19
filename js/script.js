@@ -7,6 +7,7 @@
   const $ = (s) => document.querySelector(s);
   const form = $("#todo-form");
   const taskInput = $("#task-input");
+  const noteInput = $("#note-input");
   const dateInput = $("#date-input");
   const errTitle = $("#err-title");
   const errDue = $("#err-due");
@@ -70,7 +71,9 @@
       btn.addEventListener(
         "click",
         () => {
-          try { onClick(); } catch (e) {}
+          try {
+            onClick();
+          } catch (e) {}
           if (toastWrap.contains(el)) toastWrap.removeChild(el);
         },
         { once: true }
@@ -123,7 +126,8 @@
     bar.style.width = pct + "%";
     barText.textContent = `${done} of ${total} (${pct}%)`;
     // Easter egg: encourage focus (ISTJ vibe)
-    if (pct === 100 && total > 0) showToast("Semua selesai! Rapi dan mantap 💪");
+    if (pct === 100 && total > 0)
+      showToast("Semua selesai! Rapi dan mantap 💪");
   }
 
   // Render table
@@ -171,6 +175,10 @@
       if (t.done) span.classList.add("done");
       tdTask.appendChild(cb);
       tdTask.appendChild(span);
+
+      // Note
+      const tdNote = document.createElement("td");
+      tdNote.textContent = t.note || "";
 
       // Due
       const tdDue = document.createElement("td");
@@ -224,6 +232,7 @@
       tdAct.appendChild(delBtn);
 
       tr.appendChild(tdTask);
+      tr.appendChild(tdNote);
       tr.appendChild(tdDue);
       tr.appendChild(tdStatus);
       tr.appendChild(tdAct);
@@ -259,8 +268,11 @@
     e.preventDefault();
     if (!validate()) return;
     todos.push({
-      id: crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2, 9),
+      id: crypto.randomUUID
+        ? crypto.randomUUID()
+        : Math.random().toString(36).slice(2, 9),
       title: taskInput.value.trim(),
+      note: noteInput.value.trim(),
       due: dateInput.value,
       done: false,
       createdAt: new Date().toISOString(),
@@ -318,10 +330,16 @@
   document.addEventListener("keydown", (e) => {
     if (!scrollArea) return;
     if (e.key === "PageDown") {
-      scrollArea.scrollBy({ top: scrollArea.clientHeight * 0.9, behavior: "smooth" });
+      scrollArea.scrollBy({
+        top: scrollArea.clientHeight * 0.9,
+        behavior: "smooth",
+      });
       e.preventDefault();
     } else if (e.key === "PageUp") {
-      scrollArea.scrollBy({ top: -scrollArea.clientHeight * 0.9, behavior: "smooth" });
+      scrollArea.scrollBy({
+        top: -scrollArea.clientHeight * 0.9,
+        behavior: "smooth",
+      });
       e.preventDefault();
     } else if (e.key === "Home") {
       scrollArea.scrollTo({ top: 0, behavior: "smooth" });
