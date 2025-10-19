@@ -1,0 +1,13 @@
+{
+  "name": "codingcamp13okt2025",
+  "version": "1.0.0",
+  "description": "Todo sample for workshop",
+  "scripts": {
+    "test": "jest --runInBand",
+    "test:puppeteer": "jest tests/deleteAll.test.js --runInBand"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "puppeteer": "^21.0.0"
+  }
+}
